@@ -1,9 +1,9 @@
-const { Task, Stad} = require('../models/index.js');
+const { Task, Category} = require('../models/index.js');
 
 const TaskController = {
     getAll(req,res){
         Task.findAll(
-            // {include: [Stad]}
+            {include: [Category] }
             )
           .then(task => res.send(task))
           .catch(err=>{
@@ -12,11 +12,13 @@ const TaskController = {
             })
     },
     postAll(req,res){
-        let {name, description, user }= req.body;
+        let {name, description, CategoryId, UserId, StadId }= req.body;
         Task.create({
             name,
             description,
-            user
+            CategoryId,
+            UserId,
+            StadId
         })
         .then(()=>{
             res.statusCode=201;

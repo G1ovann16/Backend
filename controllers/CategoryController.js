@@ -12,11 +12,11 @@ const CategoryController = {
           })
     },
    postAll(req,res){
-    let {category, name, description }= req.body;
+    let {name, description, TaskId }= req.body;
     Category.create({
-        category,
         name,
-        description
+        description,
+        TaskId
     })
     .then(()=>{
         res.statusCode=201;

@@ -14,7 +14,7 @@ module.exports = {
       register: {
         type: Sequelize.STRING
       },
-      StadId: {
+      TaskId: {
         type: Sequelize.INTEGER
       },
       createdAt: {

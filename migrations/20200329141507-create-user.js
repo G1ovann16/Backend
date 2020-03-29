@@ -23,7 +23,7 @@ module.exports = {
       direction: {
         type: Sequelize.STRING
       },
-      UserId: {
+      TaskId: {
         type: Sequelize.INTEGER
       },
       createdAt: {

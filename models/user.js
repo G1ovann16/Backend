@@ -5,10 +5,12 @@ module.exports = (sequelize, DataTypes) => {
     lastname: DataTypes.STRING,
     email: DataTypes.STRING,
     password: DataTypes.STRING,
-    direction: DataTypes.STRING
+    direction: DataTypes.STRING,
+    UserId: DataTypes.INTEGER
   }, {});
   User.associate = function(models) {
     // associations can be defined here
+    User.hasMany(models.Task)
   };
   return User;
 };

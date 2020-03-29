@@ -1,8 +1,10 @@
-const { Task, Status} = require('../models/index.js');
+const { Task, Stad} = require('../models/index.js');
 
 const TaskController = {
     getAll(req,res){
-        Task.findAll()
+        Task.findAll(
+            // {include: [Stad]}
+            )
           .then(task => res.send(task))
           .catch(err=>{
               console.log(err);

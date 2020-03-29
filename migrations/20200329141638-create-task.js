@@ -17,6 +17,15 @@ module.exports = {
       user: {
         type: Sequelize.STRING
       },
+      CategoryId: {
+        type: Sequelize.INTEGER
+      },
+      UserId: {
+        type: Sequelize.INTEGER
+      },
+      StadId: {
+        type: Sequelize.INTEGER
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

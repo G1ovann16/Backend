@@ -14,6 +14,9 @@ module.exports = {
       register: {
         type: Sequelize.STRING
       },
+      StadId: {
+        type: Sequelize.INTEGER
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
@@ -22,7 +25,7 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE
       }
-    });
+    });r
   },
   down: (queryInterface, Sequelize) => {
     return queryInterface.dropTable('Stads');

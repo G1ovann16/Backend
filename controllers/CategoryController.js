@@ -1,12 +1,14 @@
-const { Category } = require('../models/index.js');
+const { Category, Task } = require('../models/index.js');
 
 const CategoryController = {
     getAll(req,res){   
-        Category.findAll()
+        Category.findAll(
+            {include : [Task ]}
+            )
         .then(category => res.send(category))
         .catch(err=>{
             console.log(err);
-            res.status(500).send({message: "error to load to user"})
+            res.status(500).send({message: "error to load to Category"})
           })
     },
    postAll(req,res){

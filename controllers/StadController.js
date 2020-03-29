@@ -23,7 +23,20 @@ const StadController = {
         res.statusCode=401;
         res.json( {status: 'ko', message:err})
     })
+},
+erase(req, res){
+    let id = req.params.id;
+    
+    Stad.destroy(
+       {where: { id: id }}
+    ).then(()=>{
+        res.statusCode=201;
+        res.json({status: 'ok'})
+    })
+    .catch(err =>{
+        res.statusCode=401;
+        res.json( {status: 'ko', message:err})
+    });
+    }
 }
-}
-
 module.exports = StadController;

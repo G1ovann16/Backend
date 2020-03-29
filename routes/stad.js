@@ -8,4 +8,6 @@ router.get('/',StadController.getAll )
 // post
 router.post('/', StadController.postAll)
 
+router.delete('/:id', StadController.erase)
+
 module.exports=router;

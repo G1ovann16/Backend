@@ -3,7 +3,7 @@ const router = require('express').Router();
 const CategoryController = require('../controllers/CategoryController.js')
 
 // get
-router.get('/',CategoryController.getAll )
+router.get('/',CategoryController.getAll)
 
 // post
 router.post('/', CategoryController.postAll)

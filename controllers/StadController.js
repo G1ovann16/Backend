@@ -1,8 +1,10 @@
-const { Stad } = require('../models/index.js');
+const { Stad, Task } = require('../models/index.js');
 
 const StadController = {
     getAll(req,res){   
-        Stad.findAll()
+        Stad.findAll(
+            {include : [Task ]}
+        )
         .then(stad => res.send(stad))
         .catch(err=>{
             console.log(err);
@@ -10,10 +12,11 @@ const StadController = {
           })
     },
    postAll(req,res){
-    let {name, register }= req.body;
+    let {name, register, TaskId }= req.body;
     Stad.create({
         name,
-        register
+        register,
+        TaskId
     })
     .then(()=>{
         res.statusCode=201;

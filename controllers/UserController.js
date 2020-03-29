@@ -1,8 +1,10 @@
-const { User} = require('../models/index.js');
+const { User, Task} = require('../models/index.js');
 
 const UserController = {
     getAll(req,res){   
-        User.findAll()
+        User.findAll(
+            {include : [Task ]}
+        )
         .then(user => res.send(user))
         .catch(err=>{
             console.log(err);
@@ -10,13 +12,14 @@ const UserController = {
           })
     },
    postAll(req,res){
-    let {name, lastName, email, password, direction }= req.body;
+    let {name, lastName, email, password, direction, TaskId }= req.body;
     User.create({
         name,
         lastName,
         email,
         password,
-        direction
+        direction,
+        TaskId
     })
     .then(()=>{
         res.statusCode=201;

@@ -1,11 +1,11 @@
 const express = require('express');
 const app = express();
-const PORT = 3000; 
+const PORT = 4000; 
 
 const stadRouter = require('./routes/stad');
 const taskRouter = require('./routes/task');
-const userRouter = require('./routes/user');
-const categoryRouter = require('./routes/category');
+const userRouter = require('./routes/user.js');
+const categoryRouter = require('./routes/category.js');
 
 
 app.use(express.json()); //bodyparser

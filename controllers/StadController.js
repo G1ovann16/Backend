@@ -1,45 +1,44 @@
 const { Stad, Task } = require('../models/index.js');
 
 const StadController = {
-    getAll(req,res){   
-        Stad.findAll(
-            {include : [Task ]}
-        )
-        .then(stad => res.send(stad))
-        .catch(err=>{
-            console.log(err);
-            res.status(500).send({message: "error to load to user"})
+    async getAllStad(req, res){
+        try {
+          const states = await  Stad.findAll({
+            // include: [ task ], order: [
+            //   ['id', 'ASC'],]
           })
+          console.log('¡obtenifo')
+          res.status(200).send(states);
+        } catch (error) {
+            console.log(error)
+            res.status(500).send(error)
+        }
     },
-   postAll(req,res){
-    let {name, register, TaskId }= req.body;
-    Stad.create({
-        name,
-        register,
-        TaskId
-    })
-    .then(()=>{
-        res.statusCode=201;
-        res.json({status: 'ok'})
-    })
-    .catch(err =>{
-        res.statusCode=401;
-        res.json( {status: 'ko', message:err})
-    })
-},
-erase(req, res){
-    let id = req.params.id;
+    async  setStat(req,res){
+        try {
+          const states = await Stad.create({
+               name: req.body.name,
+               register: req.body.register,
+               TaskId: req.body.TaskId
+                    })
+                    res.status(201).send(states);
+        } catch (error) {
+            console.log(error)
+                res.status(500).send(error)
+        }
+    },
+async erase(req, res){
+    try {
+        const id = req.params.id;
+        const states = await Stad.destroy({
+            where:{id:id}
+        })
+        res.status(200).send('destroy');
+        } catch (error) {
+            console.log(error)
+                res.status(500).send(error)
+        }
+    }    
     
-    Stad.destroy(
-       {where: { id: id }}
-    ).then(()=>{
-        res.statusCode=201;
-        res.json({status: 'ok'})
-    })
-    .catch(err =>{
-        res.statusCode=401;
-        res.json( {status: 'ko', message:err})
-    });
-    }
 }
 module.exports = StadController;

@@ -1,32 +1,30 @@
 const { Category, Task } = require('../models/index.js');
 
 const CategoryController = {
-    getAll(req,res){   
-        Category.findAll(
-            {include : [Task ]}
-            )
-        .then(category => res.send(category))
-        .catch(err=>{
-            console.log(err);
-            res.status(500).send({message: "error to load to Category"})
+    async getAllCategory(req, res){
+        try {
+          const categories = await  Category.findAll({
           })
+          console.log('¡obtenifo')
+          res.status(200).send(categories);
+        } catch (error) {
+            console.log(error)
+            res.status(500).send(error)
+        }
     },
-   postAll(req,res){
-    let {name, description, TaskId }= req.body;
-    Category.create({
-        name,
-        description,
-        TaskId
-    })
-    .then(()=>{
-        res.statusCode=201;
-        res.json({status: 'ok'})
-    })
-    .catch(err =>{
-        res.statusCode=401;
-        res.json( {status: 'ko', message:err})
-    })
-}
+    async  setCategory(req,res){
+        try {
+          const categories = await Category.create({
+               name: req.body.name,
+               desciption: req.body.desciption,
+               TaskId: req.body.TaskId
+                    })
+                    res.status(201).send(categories);
+        } catch (error) {
+            console.log(error)
+                res.status(500).send(error)
+        }
+    }
 }
 
 module.exports = CategoryController;

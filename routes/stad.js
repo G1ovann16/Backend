@@ -3,10 +3,10 @@ const router = require('express').Router();
 const StadController = require('../controllers/StadController.js')
 
 // get
-router.get('/',StadController.getAll )
+router.get('/',StadController.getAllStad )
 
 // post
-router.post('/', StadController.postAll)
+router.post('/', StadController.setStat)
 
 router.delete('/:id', StadController.erase)
 

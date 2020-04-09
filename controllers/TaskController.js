@@ -1,47 +1,45 @@
-const { Task, Category} = require('../models/index.js');
+const { Task, Category, User, Stad} = require('../models/index.js');
 
 const TaskController = {
-    getAll(req,res){
-        Task.findAll(
-            {include: [Category] }
-            )
-          .then(task => res.send(task))
-          .catch(err=>{
-              console.log(err);
-              res.status(500).send({message: "error to load to task"})
+    async getAllTask(req, res){
+        try {
+          const tasks = await  Task.findAll({
+                include: [Category, User, Stad]
+        })
+          console.log('¡obtenifo')
+          res.status(200).send(tasks);
+        } catch (error) {
+            console.log(error)
+            res.status(500).send(error)
+        }
+    },
+    async  setTask(req,res){
+        try {
+          const tasks = await Task.create({
+               name: req.body.name,
+               description: req.body.description,
+               StadId: req.body.StadId,
+               CategoryId: req.body.CategoryId,
+               UserId: req.body.UserId
+                    })
+                    res.status(201).send(tasks);
+        } catch (error) {
+            console.log(error)
+                res.status(500).send(error)
+        }
+    },
+  async  delete(req,res){
+        try {
+            const id = req.params.id;
+            const tasks = await Task.destroy({
+                where:{id:id}
             })
-    },
-    postAll(req,res){
-        let {name, description, CategoryId, UserId, StadId }= req.body;
-        Task.create({
-            name,
-            description,
-            CategoryId,
-            UserId,
-            StadId
-        })
-        .then(()=>{
-            res.statusCode=201;
-            res.json({status: 'ok'})
-        })
-        .catch(err =>{
-            res.statusCode=401;
-            res.json( {status: 'ko', message:err})
-        })
-    },
-    delete(req,res){
-        let id = req.params.id;
-    let body = req.body;
-     Task.destroy({where: {id : id}}
-    ).then(()=>{
-    res.statusCode=201;
-    res.json({status: 'ok'})
-    })
-    .catch(err =>{
-    res.statusCode=401;
-    res.json( {status: 'ko', message:err})
-})
-     }
+            res.status(200).send('destroy');
+            } catch (error) {
+                console.log(error)
+                    res.status(500).send(error)
+            }
+        }  
 }
 
 module.exports = TaskController;
